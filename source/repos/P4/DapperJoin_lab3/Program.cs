@@ -9,7 +9,7 @@ var sql = "SELECT TerritoryId, TerritoryDescription, t.RegionId, r.RegionDescrip
 var conn = new SqlConnection(cstring);
 
 Console.WriteLine("Podaj pierwszą literę regionu: ");
-var userLetter = Console.ReadLine()?.Trim();
+var userLetter = Console.ReadLine()?.Take(1);
 
 var result = conn.Query<Territories, Region, Territories>(sql, (territory, region) =>
 {
