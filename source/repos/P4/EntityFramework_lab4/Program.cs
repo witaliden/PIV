@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using EntityFramework_lab4;
 
 var context = new MyDbContext();
