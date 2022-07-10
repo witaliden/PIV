@@ -1,55 +1,114 @@
 ﻿using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework_Library;
-using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 var context = new MyDbContext();
 context.Database.EnsureCreated();
-context.Database.EnsureCreated();
-context.Database.Migrate();
+//context.Entry(Author).State = EntityState.Detached;
 
-//using var transactions = context.Database.BeginTransaction();
-
-for (var i = 1; i <= 20; i++)
+//Wpisuje do bazy losowe dane
+if (context.Authors.Count() < 1)
 {
-    context.Authors!.Add(new Author() {
-        AuthorId = i,
-        FirstName = Randomizer.RandomString(RandomNumberGenerator.GetInt32(30)),
-        LastName = Randomizer.RandomString(i + 7)
-    });
-    context.Books!.Add(new() {
-        BookId = i,
-        Title = Randomizer.RandomString(i + 7),
-        Year = 2022 + i,
-        //Author = context.Authors.TakeLast(aut)
-    });
+    FillAuthors();
+    Thread.Sleep(3000);
+    FillBooks();
+    Thread.Sleep(4000);
 }
 
-/*if (context.Authors != null)
-{
-    var result = context.Authors.ToArray();
-}*/
+Console.WriteLine("Witamy w bibliotece \n");
+Console.WriteLine("Wpisz 1 by wyszukać autora");
+Console.WriteLine("Wpisz 2 by wyszukać książki");
+Console.WriteLine("Wpisz 3 by zamknąć aplikację");
 
-context.SaveChanges();
+short userChoise;
+do {
+    userChoise = Convert.ToInt16(Console.ReadLine());
+    switch (userChoise) {
+        case 1: 
+            GetAuthor(); 
+            Console.WriteLine("\n"); 
+            break; 
+        case 2: 
+            GetBook(); 
+            Console.WriteLine("\n"); 
+            break; 
+    } 
+} while (userChoise != 3);
 
-/*void SearchLibrary()
-{
-    Console.WriteLine("Chcesz wyszukać książkę - podaj 1, autora - podaj 2.");
-    var choice = Convert.ToInt32(Console.ReadLine());
-    string userInput;
-    switch (choice)
+
+
+//wypełnienie tabeli autorów
+void FillAuthors() 
+{ 
+    for (var i = 1; i <= 10; i++) 
     {
-        case 1:
-            Console.WriteLine("Szukasz książkę. Podaj tytuł: ");
-            userInput = Console.ReadLine()!.ToString().Trim();
-            Console.WriteLine(context.Books!.Where(book => book.Title == userInput));
-            break;
-        case 2:
-            Console.WriteLine("Szukasz autora. Podaj nazwisko: ");
-            userInput = Console.ReadLine()!.ToString().Trim();
-            Console.WriteLine(context.Authors!.Where(author => author.LastName == userInput));
-                          //"\n" + context.Books!.Where(book => book.AuthorID == ));
-            break;
+        context.Authors!.Add((new Author() 
+        { 
+            FirstName = Randomizer.RandomString(RandomNumberGenerator.GetInt32(30)), 
+            LastName = Randomizer.RandomString(i + 7) // DML(
+        }));
+    } context?.SaveChanges();
+}
 
+//wypełnienie tabeli książek
+void FillBooks() 
+{
+    var tempAuthorList = GetAllAuthors(); 
+    foreach (var a in tempAuthorList) 
+    { 
+        for (var i = 1; i <= 10; i++) 
+        {
+            EntityEntry<Book> b = context!.Books!.Add(new Book() 
+            { 
+                Title = Randomizer.RandomString(i + 7), 
+                Year = 2022 + i, 
+                AuthorId = a
+            });
+        }
+    } context?.SaveChanges();
+}
+
+void GetBook() { 
+    Console.WriteLine("Podaj tytuł książki: ");
+    
+    var keyWord = Console.ReadLine()!.Trim(); 
+    if(context.Authors is null) return; 
+    var selectedBooks = context.Books!
+        .Include(b => b.Author)!
+        .Where(b => b.Title.Contains(keyWord!))
+        .ToList();
+
+    foreach (var book in selectedBooks) {
+        Console.WriteLine("\n" + Environment.NewLine); 
+        Console.WriteLine($"Tytuł: {book.Title}"); 
+        Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author.LastName}"); 
+        Console.WriteLine($"Rok wydania: {book.Year}"); 
     }
-}*/
+}
+
+void GetAuthor() { 
+    Console.WriteLine("Podaj nazwisko autora: \n"); 
+    var keyWord = Console.ReadLine()!.Trim(); 
+    if (context.Authors == null) return;
+    var authorBooks = context.Authors.Include(ab => ab.AuthorBooks)
+        .ThenInclude(book => book.Author).Where(a => a.LastName.Equals(keyWord))
+        .SelectMany(a => a.AuthorBooks).ToList();
+    //authorBooks.FirstOrDefault().Books.Add();
+
+    Console.WriteLine("Książki autora: ");
+    foreach (var book in authorBooks) {
+        Console.WriteLine("\n" + Environment.NewLine); 
+        Console.WriteLine($"Tytuł: {book.Title}"); 
+        Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author.LastName}"); 
+        Console.WriteLine($"Rok wydania: {book.Year}"); 
+    }
+}
+
+List<int> GetAllAuthors()
+{
+    if (context!.Authors == null) return null;
+    List<int> authors = context.Authors
+        .Select(a => a.AuthorId).ToList();
+    return authors;
+}
