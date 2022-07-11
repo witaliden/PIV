@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_0508", "WPF_0508\WPF_05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework_Library", "EntityFramework_Library\EntityFramework_Library.csproj", "{74A20AA4-DFCC-4E60-97E6-C7D4D128AF52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryGenerator", "LibraryGenerator\LibraryGenerator.csproj", "{80E86D14-A72B-45F3-B3F5-3389F18CC084}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

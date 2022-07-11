@@ -8,7 +8,7 @@ context.Database.EnsureCreated();
 //context.Entry(Author).State = EntityState.Detached;
 
 //Wpisuje do bazy losowe dane
-if (context.Authors.Count() < 1)
+if (context.Authors != null && !context.Authors.Any())
 {
     FillAuthors();
     Thread.Sleep(3000);
@@ -37,7 +37,6 @@ do {
 } while (userChoise != 3);
 
 
-
 //wypełnienie tabeli autorów
 void FillAuthors() 
 { 
@@ -55,18 +54,26 @@ void FillAuthors()
 void FillBooks() 
 {
     var tempAuthorList = GetAllAuthors(); 
-    foreach (var a in tempAuthorList) 
-    { 
+    foreach (var a in tempAuthorList)
+    {
+        List<Book>? generatedBooks = null;
+        Book? genBook;
         for (var i = 1; i <= 10; i++) 
         {
-            EntityEntry<Book> b = context!.Books!.Add(new Book() 
+            genBook = new Book() 
             { 
                 Title = Randomizer.RandomString(i + 7), 
                 Year = 2022 + i, 
                 AuthorId = a
-            });
+            };
+            generatedBooks!.Add(genBook);
         }
-    } context?.SaveChanges();
+
+        var tempAuthor = context!.Authors.FirstOrDefault(item => item.AuthorId == a);
+        tempAuthor!.AuthorBooks = generatedBooks;
+        //generatedBooks?.ForEach(b => context.Books?.Add(b));
+        context?.SaveChanges();
+    }
 }
 
 void GetBook() { 
@@ -76,13 +83,13 @@ void GetBook() {
     if(context.Authors is null) return; 
     var selectedBooks = context.Books!
         .Include(b => b.Author)!
-        .Where(b => b.Title.Contains(keyWord!))
+        .Where(w => w.Title.Contains(keyWord!))
         .ToList();
 
     foreach (var book in selectedBooks) {
         Console.WriteLine("\n" + Environment.NewLine); 
         Console.WriteLine($"Tytuł: {book.Title}"); 
-        Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author.LastName}"); 
+        Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author}"); 
         Console.WriteLine($"Rok wydania: {book.Year}"); 
     }
 }
@@ -92,8 +99,8 @@ void GetAuthor() {
     var keyWord = Console.ReadLine()!.Trim(); 
     if (context.Authors == null) return;
     var authorBooks = context.Authors.Include(ab => ab.AuthorBooks)
-        .ThenInclude(book => book.Author).Where(a => a.LastName.Equals(keyWord))
-        .SelectMany(a => a.AuthorBooks).ToList();
+        /*.ThenInclude(book => book.Author)*/.Where(a => a.LastName!.Equals(keyWord))
+        .SelectMany(a => a.AuthorBooks!).ToList();
     //authorBooks.FirstOrDefault().Books.Add();
 
     Console.WriteLine("Książki autora: ");
