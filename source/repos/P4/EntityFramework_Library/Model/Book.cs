@@ -13,8 +13,7 @@ namespace EntityFramework_Library
         public string Title { get; set; }
         public int Year { get; set; }
         public int AuthorId { get; set; }
-        
-        [ForeignKey(nameof(AuthorId))]
+        //[ForeignKey(nameof(AuthorId))]
         //[InverseProperty("Books")]
         public virtual Author? Author { get; }
         //public IQueryable<Author> BookAuthors { get; set; }

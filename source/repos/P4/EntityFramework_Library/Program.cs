@@ -51,30 +51,25 @@ void FillAuthors()
 }
 
 //wypełnienie tabeli książek
-void FillBooks() 
+void FillBooks()
 {
-    var tempAuthorList = GetAllAuthors(); 
+    var tempAuthorList = GetAllAuthors();
     foreach (var a in tempAuthorList)
     {
-        List<Book>? generatedBooks = null;
-        Book? genBook;
-        for (var i = 1; i <= 10; i++) 
+        for (var i = 1; i <= 10; i++)
         {
-            genBook = new Book() 
-            { 
-                Title = Randomizer.RandomString(i + 7), 
-                Year = 2022 + i, 
+            context!.Books!.Add(new Book()
+            {
+                Title = Randomizer.RandomString(i + 7),
+                Year = 2022 + i,
                 AuthorId = a
-            };
-            generatedBooks!.Add(genBook);
+            });
         }
-
-        var tempAuthor = context!.Authors.FirstOrDefault(item => item.AuthorId == a);
-        tempAuthor!.AuthorBooks = generatedBooks;
-        //generatedBooks?.ForEach(b => context.Books?.Add(b));
+        
         context?.SaveChanges();
     }
 }
+
 
 void GetBook() { 
     Console.WriteLine("Podaj tytuł książki: ");

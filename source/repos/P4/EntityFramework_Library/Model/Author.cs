@@ -15,7 +15,10 @@ namespace EntityFramework_Library
         //public IQueryable<Book> AuthorBooks { get; set; }
         //[InverseProperty(nameof(Book.Author))]
         public virtual ICollection<Book>? AuthorBooks { get; set; }
-        //public virtual List<Book>? AuthorBooks { get; set; }
-        
+
+        public Author()
+        {
+            AuthorBooks = new List<Book>();
+        }
     }
 }
