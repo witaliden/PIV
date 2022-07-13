@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using EntityFramework_Library.Model;
+
 namespace EntityFramework_Library;
 
-internal class MyDbContext : DbContext
+public class MyDbContext : DbContext
 {
     public DbSet<Author>? Authors { get; set; }
     public DbSet<Book>? Books { get; set; }

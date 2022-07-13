@@ -1,4 +1,4 @@
-﻿namespace EntityFramework_Library;
+﻿namespace EntityFramework_Library.db;
 
 public class Randomizer
 {

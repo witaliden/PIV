@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntityFramework_Library.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework_Library
@@ -10,7 +11,7 @@ namespace EntityFramework_Library
         [Key]
         public int BookId { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public int Year { get; set; }
         public int AuthorId { get; set; }
         //[ForeignKey(nameof(AuthorId))]

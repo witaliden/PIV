@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace EntityFramework_Library
+namespace EntityFramework_Library.Model
 {
     [Table("Authors")]
     public class Author
@@ -16,9 +14,9 @@ namespace EntityFramework_Library
         //[InverseProperty(nameof(Book.Author))]
         public virtual ICollection<Book>? AuthorBooks { get; set; }
 
-        public Author()
+        /*public Author()
         {
             AuthorBooks = new List<Book>();
-        }
+        }*/
     }
 }
