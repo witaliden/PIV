@@ -1,20 +1,16 @@
-﻿using EntityFramework_Library;
-using EntityFramework_Library.db;
+﻿using EntityFramework_Library.db;
 
 SqlCommands commands = new SqlCommands();
 var context = new MyDbContext();
-context.Database.EnsureCreated();
-//context.Entry(Author).State = EntityState.Detached;
 
 //Wpisuje do bazy losowe dane
 if (context.Authors != null && !context.Authors.Any())
 {
     commands.FillAuthors(context);
-    Thread.Sleep(3000);
+    Thread.Sleep(4000);
     commands.FillBooks(context);
     Thread.Sleep(4000);
 }
-
 
 Console.WriteLine("Witamy w bibliotece \n");
 
@@ -39,5 +35,5 @@ do {
             commands.GetBook(context, keyWord); 
             Console.WriteLine("\n"); 
             break; 
-    } 
+    }
 } while (userChoise != 3);

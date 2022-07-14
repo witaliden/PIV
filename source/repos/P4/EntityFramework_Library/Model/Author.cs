@@ -6,17 +6,18 @@ namespace EntityFramework_Library.Model
     [Table("Authors")]
     public class Author
     {
-        [Key]
+        public Author()
+        {
+            AuthorBooks = new HashSet<Book>();
+        }
         public int AuthorId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        //public IQueryable<Book> AuthorBooks { get; set; }
-        //[InverseProperty(nameof(Book.Author))]
         public virtual ICollection<Book>? AuthorBooks { get; set; }
-
-        /*public Author()
+        
+        public override string ToString()
         {
-            AuthorBooks = new List<Book>();
-        }*/
+            return "book " + AuthorId + " " + FirstName + " " + LastName;
+        }
     }
 }

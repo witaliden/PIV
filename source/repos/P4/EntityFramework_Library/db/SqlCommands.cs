@@ -19,7 +19,7 @@ namespace EntityFramework_Library.db
             {
                 Console.WriteLine("\n" + Environment.NewLine);
                 Console.WriteLine($"Tytuł: {book.Title}");
-                Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author}");
+                Console.WriteLine($"Autor: {book.Author!.FirstName} {book.Author.LastName}");
                 Console.WriteLine($"Rok wydania: {book.Year}");
             }
         }
@@ -29,9 +29,8 @@ namespace EntityFramework_Library.db
         {
             if (context.Authors == null) return;
             var authorBooks = context.Authors.Include(ab => ab.AuthorBooks)!
-                /*.ThenInclude(book => book.Author)*/.Where(a => a.LastName!.Equals(keyWord))
+                .ThenInclude(book => book.Author).Where(a => a.LastName!.Equals(keyWord))
                 .SelectMany(a => a.AuthorBooks!).ToList();
-            //authorBooks.FirstOrDefault().Books.Add();
 
             Console.WriteLine("Książki autora: ");
             foreach (var book in authorBooks)
@@ -63,7 +62,8 @@ namespace EntityFramework_Library.db
                 context.Authors!.Add((new Author()
                 {
                     FirstName = Randomizer.RandomString(RandomNumberGenerator.GetInt32(30)),
-                    LastName = Randomizer.RandomString(i + 7) // DML(
+                    LastName = Randomizer.RandomString(i + 7) //
+                    
                 }));
             }
             context?.SaveChanges();
