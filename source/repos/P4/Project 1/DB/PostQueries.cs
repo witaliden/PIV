@@ -56,9 +56,9 @@ namespace Project_1.DB
             {
                 context.SamochodyDbSet!.Add(new Samochody()
                 {
-                    Vin = Randomizer.RandomString(17),
+                    Vin = Randomizer.RandomString(17).Trim(),
                     Dostepnosc = "Dostępny",
-                    NumerRejestracyjny = Randomizer.RandomString(2) + new Random().Next(1000, 99999).ToString(),
+                    NumerRejestracyjny = Randomizer.RandomString(2) + new Random().Next(1000, 99999).ToString().Trim(),
                     Marka = "Ford",
                     Model = "Mondeo " + i,
                     PojemnoscSilnika = (short)new Random().Next(1000, 4500)
@@ -79,10 +79,10 @@ namespace Project_1.DB
                 {
                     //PracownikId = i,
                     Pesel = new Random().NextInt64(10000000000, 99999999999).ToString(),
-                    Imie = randomizerFirstName.Generate(),
-                    Nazwisko = randomizerLastName.Generate(),
+                    Imie = randomizerFirstName.Generate().Trim(),
+                    Nazwisko = randomizerLastName.Generate().Trim(),
                     Plec = Randomizer.RandomGender(),
-                    Stanowisko = "Wdrożeniowiec"
+                    Stanowisko = "Wdrożeniowiec".Trim()
                 });
             }
             context?.SaveChanges();

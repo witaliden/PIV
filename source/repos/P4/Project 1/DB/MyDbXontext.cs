@@ -19,8 +19,6 @@ namespace Project_1.DB
         public virtual DbSet<Pracownicy> PracownicyDbSet { get; set; } = null!;
         public virtual DbSet<Przejazdy> PrzejazdyDbSet { get; set; } = null!;
         public virtual DbSet<Samochody> SamochodyDbSet { get; set; } = null!;
-        public virtual DbSet<WTrkaciePrzejazdu> WTrkaciePrzejazduDbSet { get; set; } = null!;
-        public virtual DbSet<DostepneSamochody> DostepneSamochodyDbSet { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,17 +32,6 @@ namespace Project_1.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DostepneSamochody>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("DostepneSamochody");
-
-                entity.Property(e => e.Samochód)
-                    .HasMaxLength(54)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Pracownicy>(entity =>
             {
                 entity.HasKey(e => e.PracownikId)
@@ -152,27 +139,6 @@ namespace Project_1.DB
                     .IsUnicode(false)
                     .IsFixedLength();
             });
-
-            modelBuilder.Entity<WTrkaciePrzejazdu>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("wTrkaciePrzejazdu");
-
-                entity.Property(e => e.CelWyjazdu)
-                    .HasMaxLength(90)
-                    .IsUnicode(false)
-                    .HasColumnName("Cel wyjazdu");
-
-                entity.Property(e => e.Pracownik)
-                    .HasMaxLength(104)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Samochód)
-                    .HasMaxLength(52)
-                    .IsUnicode(false);
-            });
-
             OnModelCreatingPartial(modelBuilder);
         }
 
