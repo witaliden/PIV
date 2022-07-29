@@ -1,0 +1,18 @@
+﻿<Window x:Class="lab6_login.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="WPF login page application" Height="600" Width="800" Style="{DynamicResource WindowStyle}">
+    <Grid>
+        <StackPanel>
+            <Label x:Name="label" Content="Login page" Style="{DynamicResource LabelStyle}"/>
+            <TextBox x:Name="login_textBox" Style="{DynamicResource TextBoxStyle}"/>
+            <TextBox x:Name="password_textBox" Style="{DynamicResource TextBoxStyle}"/>
+            <Button x:Name="login_button" Content="Login" Style="{DynamicResource ButtonStyle}"/>
+            <ComboBox x:Name="comboBox" SelectionChanged="StyleChange" Style="{DynamicResource ComboBoxStyle}"/>
+        </StackPanel>
+    </Grid>
+
+</Window>
