@@ -27,16 +27,17 @@ do
     Console.WriteLine("> Wpisz 9 by zamknąć aplikację\n");
 
     userChoise = Convert.ToInt16(Console.ReadLine());
+    GetQueries get = new GetQueries();
     switch (userChoise)
     {
         case 1:
             Console.WriteLine("Niezakończone wyjazdy: \n");
-            GetQueries.GetActiveTrips(context);
+            get.GetActiveTrips(context);
             Console.WriteLine("*****************\n\n");
             break;
         case 2:
             Console.WriteLine("Dostępne samochody: \n");
-            GetQueries.GetAvailableCars(context);
+            get.GetAvailableCars(context);
             Console.WriteLine("*****************\n\n");
             break;
 
@@ -52,20 +53,20 @@ do
             Console.WriteLine("Podaj stan licznika");
             var currentCounterState = int.Parse(Console.ReadLine().Trim());
 
-            PostQueries.returnCar(context, employeeID, GetQueries.returnTripID(context, employeeID), currentCounterState);
+            PostQueries.returnCar(context, employeeID, get.returnTripID(context, employeeID), currentCounterState);
             Console.WriteLine("\n\n");
             break;
 
         case 5:
             Console.WriteLine("Podaj nazwisko pracownika: ");
             keyWord = Console.ReadLine()!.Trim();
-            GetQueries.GetEmployeeByLastname(context, keyWord);
+            get.GetEmployeeByLastname(context, keyWord);
             Console.WriteLine("*****************\n\n");
             break;
         case 6:
             Console.WriteLine("Podaj id pracownika");
             employeeID = ValidateInputData.checkIfEmployeeExistById(context, int.Parse(Console.ReadLine().Trim()));
-            var nc = GetQueries.GetEmployeesActiveTrip(context, employeeID);
+            var nc = get.GetEmployeesActiveTrip(context, employeeID);
             if (nc != null)
                 Console.WriteLine(nc.ToString());
             break;

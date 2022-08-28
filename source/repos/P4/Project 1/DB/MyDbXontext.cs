@@ -24,7 +24,6 @@ namespace Project_1.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Ewidencja samochodow;Trusted_Connection=True;");
             }
             //optionsBuilder.EnableSensitiveDataLogging();
@@ -94,13 +93,13 @@ namespace Project_1.DB
                     .IsFixedLength();
 
                 entity.HasOne(d => d.Pracownik)
-                    .WithMany(p => p.Przejazdies)
+                    .WithMany(p => p.PracownikPrzejazd)
                     .HasForeignKey(d => d.PracownikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_PracownikID");
 
                 entity.HasOne(d => d.VinNavigation)
-                    .WithMany(p => p.Przejazdies)
+                    .WithMany(p => p.samochodPrzejazd)
                     .HasForeignKey(d => d.Vin)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_VIN");

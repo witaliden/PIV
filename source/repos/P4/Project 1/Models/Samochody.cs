@@ -7,7 +7,7 @@ namespace Project_1.Models
     {
         public Samochody()
         {
-            Przejazdies = new HashSet<Przejazdy>();
+            samochodPrzejazd = new HashSet<Przejazdy>();
         }
 
         public string Vin { get; set; } = null!;
@@ -17,6 +17,6 @@ namespace Project_1.Models
         public string? Model { get; set; }
         public short? PojemnoscSilnika { get; set; }
 
-        public virtual ICollection<Przejazdy> Przejazdies { get; set; }
+        public virtual ICollection<Przejazdy> samochodPrzejazd { get; set; }
     }
 }

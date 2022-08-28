@@ -8,8 +8,6 @@ namespace Project_1.DB
 {
     public class PostQueries
     {
-        //private static int podaneID;
-
         public static void takeCar(MyDbXontext context, int id) {
 
             Samochody tempSamochod = context.SamochodyDbSet.Where(w => w.Dostepnosc.Equals("Dostępny")).First();
@@ -30,16 +28,16 @@ namespace Project_1.DB
         {
             //Przejazdy tempTrip = GetQueries.GetEmployeesActiveTrip(context, employeeID);
 
-            var record = context.PrzejazdyDbSet.Find(tripID);
-            if (record == null) {
+            var returnedCar = context.PrzejazdyDbSet.Find(tripID);
+            if (returnedCar == null) {
                 Console.WriteLine("Nie znaleziono podróży o podanym ID " + tripID);
                 return;
             } else
             {
-                var updatedCar = context.SamochodyDbSet.Find(record.Vin);
-                record.StanLicznikaPo = newCounterState;
-                record.DataCzasZwrotu = DateTime.Now;
-                context.PrzejazdyDbSet.Update(record);
+                var updatedCar = context.SamochodyDbSet.Find(returnedCar.Vin);
+                returnedCar.StanLicznikaPo = newCounterState;
+                returnedCar.DataCzasZwrotu = DateTime.Now;
+                context.PrzejazdyDbSet.Update(returnedCar);
 
                 updatedCar.Dostepnosc = "Dostępny";
                 context.SamochodyDbSet.Update(updatedCar);

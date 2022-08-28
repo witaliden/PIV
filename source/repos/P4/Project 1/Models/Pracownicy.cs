@@ -7,7 +7,7 @@ namespace Project_1.Models
     {
         public Pracownicy()
         {
-            Przejazdies = new HashSet<Przejazdy>();
+            PracownikPrzejazd = new HashSet<Przejazdy>();
         }
 
         public int PracownikId { get; set; }
@@ -17,6 +17,6 @@ namespace Project_1.Models
         public string? Plec { get; set; }
         public string Stanowisko { get; set; } = null!;
 
-        public virtual ICollection<Przejazdy> Przejazdies { get; set; }
+        public virtual ICollection<Przejazdy> PracownikPrzejazd { get; set; }
     }
 }

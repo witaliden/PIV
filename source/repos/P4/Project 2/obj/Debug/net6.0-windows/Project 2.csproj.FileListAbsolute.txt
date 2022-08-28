@@ -1,0 +1,69 @@
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.csproj.AssemblyReference.cache
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2_MarkupCompile.cache
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2_MarkupCompile.lref
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Themes\Standard.baml
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Project 2.exe
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Project 2.deps.json
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Project 2.runtimeconfig.json
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Project 2.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Project 2.pdb
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Fare.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Humanizer.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.Identity.Client.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\RandomDataGenerator.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\Stef.Validation.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\System.Runtime.Caching.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.g.resources
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.AssemblyInfoInputs.cache
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.AssemblyInfo.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.csproj.CoreCompileInputs.cache
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.csproj.CopyComplete
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\refint\Project 2.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.pdb
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\Project 2.genruntimeconfig.cache
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\ref\Project 2.dll
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\App.baml
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\UserControls\CarsUserControl.g.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\UserControls\EmployeesUserControl.g.cs
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\UserControls\CarsUserControl.baml
+C:\Users\denis\source\repos\witaliden\PIV\source\repos\P4\Project 2\obj\Debug\net6.0-windows\UserControls\EmployeesUserControl.baml

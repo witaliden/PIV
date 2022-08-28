@@ -9,7 +9,7 @@ namespace EntityFramework_lab4;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-703RFM4\SQLEXPRESS;Initial Catalog=Northwind1;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JJ2EHR8\SQLEXPRESS;Initial Catalog=Northwind1;Integrated Security=True");
             //optionsBuilder.UseSqlServer(@"jdbc:jtds:sqlserver://./");
             
         } 
