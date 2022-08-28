@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="600">
+        <StackPanel HorizontalAlignment="Left" Width="700">
             <GroupBox Header="Wyszukaj" Height="600">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -27,7 +27,7 @@
                     <ListView x:Name="SearchEmployeeListView" Style="{DynamicResource ListViewStyle}" MouseDoubleClick="SearchEmployeeListView_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn x:Name="ID" Header="Dost." DisplayMemberBinding="{Binding EmployeeID}"/>
+                                <GridViewColumn Header="ID" Width="20" DisplayMemberBinding="{Binding EmployeeID}"/>
                                 <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding FirstName}"/>
                                 <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding LastName}"/>
                                 <GridViewColumn Header="PESEL" DisplayMemberBinding="{Binding PESEL}"/>
@@ -69,7 +69,18 @@
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Telefon</TextBlock>
                     <TextBox Name="newEmployeePhoneTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
 
-                    <Button x:Name="EmployeeSaveButton" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10">Zapisz</Button>
+                    <Button x:Name="EmployeeSaveButton" Content="Zapisz" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="IsEnabled" Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=newEmployeeIDTextBox}" Value="">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

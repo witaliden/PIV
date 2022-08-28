@@ -8,59 +8,76 @@
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="600">
-                    <GroupBox Header="Wyszukaj" Height="600">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <ToggleButton x:Name="CarSearchAvailabilityToggleBtn" Width="{Binding ActualWidth, ElementName=dGVC}"/>
-                                <TextBox x:Name="CarSearchId" Width="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchBrand" Width="70" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchModel" Width="70" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchRegNum" Width="60" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchEngCapTB" Width="30" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchOwnerId" Width="30" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="CarSearchVIN" Width="90" HorizontalAlignment="Left"/>
-                                <Button x:Name="FillCarsBtn" HorizontalAlignment="Right" Click="SearchCarsBtn_Click">Wyszukaj</Button>
-                            </StackPanel>
+            <GroupBox Header="Wyszukaj" Height="600">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleButton x:Name="CarSearchAvailabilityToggleBtn" Width="{Binding ActualWidth, ElementName=dGVC}"/>
+                        <TextBox x:Name="CarSearchId" Width="20" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchBrand" Width="70" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchModel" Width="70" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchRegNum" Width="60" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchEngCapTB" Width="30" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchOwnerId" Width="30" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="CarSearchVIN" Width="90" HorizontalAlignment="Left"/>
+                        <Button x:Name="FillCarsBtn" HorizontalAlignment="Right" Click="SearchCarsBtn_Click">Wyszukaj</Button>
+                    </StackPanel>
 
-                            <ListView x:Name="SearchCarListView" Style="{DynamicResource ListViewStyle}" MouseDoubleClick="CarListViewHandleDoubleClick">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn x:Name="dGVC" Header="Dost." DisplayMemberBinding="{Binding Availability}"/>
-                                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding TripID}"/>
-                                        <GridViewColumn Header="Marka" DisplayMemberBinding="{Binding Brand}"/>
-                                        <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Model}"/>
-                                        <GridViewColumn Header="Tablice" DisplayMemberBinding="{Binding RegNum}"/>
-                                        <GridViewColumn Header="Silnik" DisplayMemberBinding="{Binding EngineCapacity}"/>
-                                        <GridViewColumn Header="Właściciel" DisplayMemberBinding="{Binding CarOwner}"/>
-                                        <GridViewColumn Header="VIN" DisplayMemberBinding="{Binding VIN}"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
-                    </GroupBox>
+                    <ListView x:Name="SearchCarListView" Style="{DynamicResource ListViewStyle}" MouseDoubleClick="CarListViewHandleDoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn x:Name="dGVC" Header="Dost." DisplayMemberBinding="{Binding Availability}"/>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding TripID}"/>
+                                <GridViewColumn Header="Marka" DisplayMemberBinding="{Binding Brand}"/>
+                                <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Model}"/>
+                                <GridViewColumn Header="Tablice" DisplayMemberBinding="{Binding RegNum}"/>
+                                <GridViewColumn Header="Silnik" DisplayMemberBinding="{Binding EngineCapacity}"/>
+                                <GridViewColumn Header="Właściciel" DisplayMemberBinding="{Binding CarOwner}"/>
+                                <GridViewColumn Header="VIN" DisplayMemberBinding="{Binding VIN}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </StackPanel>
+            </GroupBox>
+        </StackPanel>
 
-                <StackPanel HorizontalAlignment="Right">
-                    <GroupBox Header="Dodaj">
-                        <StackPanel HorizontalAlignment="right" Width="250">
-                            <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">VIN</TextBlock>
-                            <TextBox Name="newCarVINTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
-                            <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Marka</TextBlock>
-                            <TextBox x:Name="newCarBrandTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
-                            <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Model</TextBlock>
-                            <TextBox x:Name="newCarModelTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+        <StackPanel HorizontalAlignment="Right">
+            <GroupBox Header="Dodaj">
+                <StackPanel HorizontalAlignment="right" Width="250">
+                    <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">VIN</TextBlock>
+                    <TextBox Name="newCarVINTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Marka</TextBlock>
+                    <TextBox x:Name="newCarBrandTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Model</TextBlock>
+                    <TextBox x:Name="newCarModelTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
 
-                            <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Numer rejestracyjny</TextBlock>
-                            <TextBox Name="newCarRegNumTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
-                            <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Pojemność silnika</TextBlock>
-                            <TextBox Name="newCarEngCapTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
-                            <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Właściciel (id)</TextBlock>
-                            <TextBox Name="newCarOwnerTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Numer rejestracyjny</TextBlock>
+                    <TextBox Name="newCarRegNumTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Pojemność silnika</TextBlock>
+                    <TextBox Name="newCarEngCapTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Właściciel (id)</TextBlock>
+                    <TextBox Name="newCarOwnerTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
 
-                            <Button x:Name="CarSaveButton" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10">Zapisz</Button>
-                        </StackPanel>
-                    </GroupBox>
+                    <Button x:Name="CarSaveButton" Content="Zapisz" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=newCarVINTextBox}" Value="{x:Null}"/>
+                                            <Condition Binding="{Binding ElementName=newCarBrandTextBox}" Value=""/>
+                                            <Condition Binding="{Binding ElementName=newCarModelTextBox}" Value=""/>
+                                            <Condition Binding="{Binding ElementName=newCarRegNumTextBox}" Value=""/>
+                                            <Condition Binding="{Binding ElementName=newCarEngCapTextBox}" Value=""/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
+            </GroupBox>
+        </StackPanel>
 
-            </Grid>
+    </Grid>
 </UserControl>

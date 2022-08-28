@@ -5,12 +5,18 @@
     <Compile Update="UserControls\EmployeesUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\TripsUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Standard.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\EmployeesUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\TripsUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

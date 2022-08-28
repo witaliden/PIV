@@ -10,6 +10,10 @@
     <SolidColorBrush x:Key="PrimaryGrayColor" Color="Gray"/>
     <SolidColorBrush x:Key="SecondaryGrayColor" Color="Gray"/>
 
+    <Style x:Key="WindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="LightGray"/>
+    </Style>
+
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Black"/>
@@ -48,9 +52,6 @@
         <Setter Property="Margin" Value="64,64"/>
     </Style>
 
-    <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="White" />
-    </Style>
 
     <Style x:Key="ListViewStyle" TargetType="ListView">
         <Setter Property="Width" Value="auto"/>

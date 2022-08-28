@@ -5,21 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_2" xmlns:tabs="clr-namespace:Project_2.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000" Style="{DynamicResource WindowStyle}">
+        Title="MainWindow" Height="750" Width="1000" Style="{DynamicResource WindowStyle}">
 
     <Grid>
         <Border CornerRadius="10"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
-            <TabControl Width="996" Height="650" Style="{DynamicResource TabControlStyle}">
+            <TabControl Width="990" Height="675" Style="{DynamicResource TabControlStyle}">
+                <TabItem Header="Wyjazdy" Style="{DynamicResource TabItemStyle}">
+                    <Grid>
+                        <tabs:TripsUserControl/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Pracownicy" Style="{DynamicResource TabItemStyle}">
+                    <Grid>
+                        <tabs:EmployeesUserControl/>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="Samochody" Style="{DynamicResource TabItemStyle}">
                     <Grid>
                         <tabs:CarsUserControl/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Employees" Style="{DynamicResource TabItemStyle}">
-                    <Grid>
-                        <tabs:EmployeesUserControl/>
                     </Grid>
                 </TabItem>
             </TabControl>
