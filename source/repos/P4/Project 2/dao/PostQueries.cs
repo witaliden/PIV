@@ -2,31 +2,50 @@
 using RandomDataGenerator.FieldOptions;
 using RandomDataGenerator.Randomizers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_2.dao
 {
     internal class PostQueries
     {
+        GetQueries getQueries = new GetQueries();
 
-        public void addCar(CrDbContext context)
+        //
+        //Cars
+        //
+        public void AddCar(CrDbContext context, Car newCar)
         {
-            context.CarDbSet.Add(new Car()
+            var carIsAvailable = getQueries.GetCarsByVin(context, newCar.VIN);
+            if (carIsAvailable == null)
             {
-                VIN = Randomizer.RandomString(17).Trim(),
-                Availability = "Dostępny",
-                RegNum = Randomizer.RandomString(2) + new Random().Next(1000, 99999).ToString().Trim(),
-                Brand = "Ford",
-                Model = "Mondeo ",
-                EngineCapacity = (short)new Random().Next(1000, 4500)
-            });
+                context.CarDbSet.Add(newCar);
+                context.SaveChanges();
+
+            }
+            else
+            {
+                var updatedCar = context.CarDbSet.Find(newCar.VIN);
+                updatedCar.RegNum = newCar.RegNum;
+                updatedCar.Brand = newCar.Brand;
+                updatedCar.Model = newCar.Model;
+                updatedCar.Availability = newCar.Availability;
+                updatedCar.EngineCapacity = newCar.EngineCapacity;
+                context.CarDbSet.Update(updatedCar);
+                context.SaveChanges();
+            }
         }
+
+        public bool carExist(CrDbContext context, Car checkedCar)
+        {
+            return getQueries.GetCarsByVinLike(context, checkedCar.VIN).Any();
+        }
+
+        //
+        //Trips
+        //
+
         public void takeCar(CrDbContext context, int employeeID)
         {
-
             Car tempCar = context.CarDbSet.Where(c => c.Availability.Equals("Dostępny")).First();
             int? counter = context.TripDbSet.Where(c => c.VIN.Equals(tempCar.VIN)).Max(l => l.CounterAfter);
 
@@ -42,14 +61,12 @@ namespace Project_2.dao
             context.SaveChanges();
         }
 
-        public void returnCar(CrDbContext context, int tripID, int newCounterState)
+        public void finishTrip(CrDbContext context, int tripID, int newCounterState)
         {
-            //Przejazdy tempTrip = GetQueries.GetEmployeesActiveTrip(context, employeeID);
-
             var trip = context.TripDbSet.Find(tripID);
             if (trip == null)
             {
-                Console.WriteLine("Nie znaleziono podróży o podanym ID " + tripID);
+                string temp = "Nie znaleziono podróży o podanym ID " + tripID;
                 return;
             }
             else
@@ -64,6 +81,15 @@ namespace Project_2.dao
                 context.SaveChanges();
             }
         }
+
+
+
+
+
+
+
+
+
 
         /*---------------Fill database---------------/
         /-------------------------------------------*/

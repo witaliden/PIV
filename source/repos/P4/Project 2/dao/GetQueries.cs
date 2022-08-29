@@ -3,13 +3,15 @@ using Project_2.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_2.dao
 {
     internal class GetQueries
     {
+
+        //================================================
+        //Cars
+        //================================================
 
         /// <summary>
         /// Funkcja zwraca List<Car> ze wszystkimi samochodami
@@ -39,6 +41,20 @@ namespace Project_2.dao
                 .Where(w => w.Availability.Equals("Dostępny"))
                 .ToList();
         }
+
+        public List<Car>? GetCarsByVinLike(CrDbContext context, string vin)
+        {
+            return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.VIN.Contains(vin)).ToList();
+        }
+
+        public Car? GetCarsByVin(CrDbContext context, string vin)
+        {
+            return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.VIN.Equals(vin)).FirstOrDefault();
+        }
+
+        //================================================
+        //Employees
+        //================================================
 
         /// <summary>
         /// Funkcja zwraca listę ID wszystkich pracowników
@@ -86,6 +102,10 @@ namespace Project_2.dao
             }
             return employees;
         }
+
+        //================================================
+        //Trips
+        //================================================
 
         /// <summary>
         /// Funkcja wyświetla listę wyjazdów, którzy nie mają podanej daty zwrotu.
@@ -136,7 +156,7 @@ namespace Project_2.dao
         public int returnTripID(CrDbContext context, int employeeId)
         {
             if (context!.TripDbSet == null) return 0;
-            Trip activeTrip = context.TripDbSet.FirstOrDefault(e => e.EmployeeID == employeeId && e.ReturnDateTime == null);
+            var activeTrip = context.TripDbSet.FirstOrDefault(e => e.EmployeeID == employeeId && e.ReturnDateTime == null);
             return activeTrip.TripID;
         }
     }
