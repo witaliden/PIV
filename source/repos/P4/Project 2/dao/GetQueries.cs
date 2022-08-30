@@ -19,27 +19,16 @@ namespace Project_2.dao
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
         public List<Car>? GetAllCars(CrDbContext context)
         {
-            if (context.CarDbSet is null)
-            {
-                Console.WriteLine("Brak samochodów w bazie danych");
-                return null;
-            }
-            return context.CarDbSet!.ToList();
+            return context.CarDbSet is null ? null : context.CarDbSet!.ToList();
         }
 
         /// <summary>
         /// Funkcja zwraca wszystkie samochody z statusem "Dostępny" jako List<Car>
         /// </summary>
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
-        public List<Car> GetAvailableCars(CrDbContext context)
+        public List<Car>? GetAvailableCars(CrDbContext context)
         {
-            if (context.CarDbSet is null) {
-                Console.WriteLine("Brak samochodów w bazie danych");
-                return null;
-            }
-            return context.CarDbSet!
-                .Where(w => w.Availability.Equals("Dostępny"))
-                .ToList();
+            return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.Availability.Equals("Dostępny")).ToList();
         }
 
         public List<Car>? GetCarsByVinLike(CrDbContext context, string vin)
@@ -61,6 +50,21 @@ namespace Project_2.dao
         /// </summary>
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
         /// <returns>Zwraca listę integerów</returns>
+
+        public List<Employee> GetAllEmployees(CrDbContext context)
+        {
+            if (context!.EmployeeDbSet == null) return null!;
+            var employees = context.EmployeeDbSet.ToList();
+            return employees;
+        }
+        public List<Employee> GetEmployeesWithDriverLicense(CrDbContext context)
+        {
+            if (context!.EmployeeDbSet == null) return null!;
+            var employees = context.EmployeeDbSet
+                .Where(a => a.Dl_Id > 0).ToList();
+            return employees;
+        }
+
         public List<int> GetAllEmployeesId(CrDbContext context)
         {
             if (context!.EmployeeDbSet == null) return null!;
@@ -74,33 +78,14 @@ namespace Project_2.dao
         /// </summary>
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
         /// <param name="keyWord">słowo kluczowe wg którego jest poszukiwany pracownik</param>
-        public List<Employee> GetEmployeeByLastname(CrDbContext context, string keyWord)
+        public List<Employee>? GetEmployeeByLastname(CrDbContext context, string keyWord)
         {
-            if (context.EmployeeDbSet == null)
-            {
-                Console.WriteLine("Brak zapisanych pracowników w bazie danych");
-                return null;
-            }
-            var employees = context.EmployeeDbSet
+            return context.EmployeeDbSet == null ? null : context.EmployeeDbSet
                 .Where(a => a.LastName!.Contains(keyWord)).ToList();
-
-            Console.WriteLine("Wynik wyszukiwania według nazwiska: ");
-
-            if (employees.Count < 1)
-            {
-                Console.WriteLine("Nie znaleziono pracownika o podanym nazwisku.");
-            }
-            else
-            {
-                foreach (var found in employees)
-                {
-                    Console.WriteLine(Environment.NewLine);
-                    Console.WriteLine($"Imię i nazwisko: {found.FirstName} {found.LastName}");
-                    Console.WriteLine($"Stanowisko: {found.JobTitle}");
-                    Console.WriteLine($"ID pracownika: {found.EmployeeID}\n***");
-                }
-            }
-            return employees;
+        }
+        public Employee? GetEmployeeById(CrDbContext context, int keyWord)
+        {
+            return context.EmployeeDbSet == null ? null : context.EmployeeDbSet.FirstOrDefault(a => a.EmployeeID == keyWord);
         }
 
         //================================================

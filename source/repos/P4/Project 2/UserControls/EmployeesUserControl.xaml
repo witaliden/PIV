@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project_2.UserControls"
+             xmlns:models="clr-namespace:Project_2.model"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <models:Employee/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <models:Employee x:Key="employeeData"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="700">
             <GroupBox Header="Wyszukaj" Height="600">
@@ -17,14 +24,15 @@
                         <TextBox x:Name="EmployeeSearchPESEL" Width="60" HorizontalAlignment="Left"/>
                         <TextBox x:Name="EmployeeSearchGender" Width="30" HorizontalAlignment="Left"/>
                         <TextBox x:Name="EmployeeSearchJobTitle" Width="30" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="EmployeeSearchDl_Id" Width="90" HorizontalAlignment="Left"/>
+                        <ToggleButton x:Name="EmployeeHasDlSearchToggleBtn" Width="20"/>
                         <TextBox x:Name="EmployeeSearchCity" Width="90" HorizontalAlignment="Left"/>
                         <TextBox x:Name="EmployeeSearchStreet" Width="90" HorizontalAlignment="Left"/>
                         <TextBox x:Name="EmployeeSearchPhone" Width="90" HorizontalAlignment="Left"/>
                         <Button x:Name="SearchEmployeeBtn" HorizontalAlignment="Right" Click="SearchEmployeeBtn_Click">Wyszukaj</Button>
                     </StackPanel>
 
-                    <ListView x:Name="SearchEmployeeListView" Style="{DynamicResource ListViewStyle}" MouseDoubleClick="SearchEmployeeListView_MouseDoubleClick">
+                    <ListView x:Name="SearchEmployeeListView" ItemsSource="{Binding employees, UpdateSourceTrigger=PropertyChanged}" 
+                              Style="{DynamicResource ListViewStyle}" MouseDoubleClick="SearchEmployeeListView_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" Width="20" DisplayMemberBinding="{Binding EmployeeID}"/>
@@ -48,39 +56,111 @@
             <GroupBox Header="Dodaj">
                 <StackPanel HorizontalAlignment="right" Width="250">
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">ID</TextBlock>
-                    <TextBox Name="newEmployeeIDTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeIDTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="EmployeeID" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Imię</TextBlock>
-                    <TextBox Name="newEmployeeFirstNameTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeFirstNameTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="FirstName" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Nazwisko</TextBlock>
-                    <TextBox Name="newEmployeeLastNameTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeLastNameTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="LastName" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">PESEL</TextBlock>
-                    <TextBox Name="newEmployeePeselTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeePeselTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="PESEL" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Płeć</TextBlock>
-                    <TextBox Name="newEmployeeGenderTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeGenderTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Gender" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Stanowisko</TextBlock>
-                    <TextBox Name="newEmployeeJobTitleTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeJobTitleTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="JobTitle" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">PJ</TextBlock>
-                    <TextBox Name="newEmployeeDL_IDTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeDL_IDTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Dl_Id" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Miasto</TextBlock>
-                    <TextBox Name="newEmployeeCityTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeCityTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="City" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Ulica</TextBlock>
-                    <TextBox Name="newEmployeeStreetTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeeStreetTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Street" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Telefon</TextBlock>
-                    <TextBox Name="newEmployeePhoneTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newEmployeePhoneTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Phone" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                    <Button x:Name="EmployeeSaveButton" Content="Zapisz" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="IsEnabled" Value="True" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=newEmployeeIDTextBox}" Value="">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    <Button x:Name="EmployeeSaveButton" 
+                            Content="Zapisz" 
+                            Width="80" HorizontalAlignment="Right" Margin="80,20,10,10"
+                            Click="EmployeeSaveButton_Click"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

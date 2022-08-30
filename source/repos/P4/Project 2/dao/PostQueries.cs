@@ -83,7 +83,33 @@ namespace Project_2.dao
         }
 
 
-
+        //
+        // Employees
+        //
+        public void AddEmployee(CrDbContext context, Employee newEmployee)
+        {
+            var employeeIsRegistered = getQueries.GetEmployeeById(context, newEmployee.EmployeeID);
+            if (employeeIsRegistered == null)
+            {
+                context.EmployeeDbSet.Add(newEmployee);
+                context.SaveChanges();
+            }
+            else
+            {
+                employeeIsRegistered.EmployeeID = newEmployee.EmployeeID;
+                employeeIsRegistered.FirstName = newEmployee.FirstName;
+                employeeIsRegistered.LastName = newEmployee.LastName;
+                employeeIsRegistered.PESEL = newEmployee.PESEL;
+                employeeIsRegistered.JobTitle = newEmployee.JobTitle;
+                employeeIsRegistered.Dl_Id = newEmployee.Dl_Id;
+                employeeIsRegistered.Gender = newEmployee.Gender;
+                employeeIsRegistered.City = newEmployee.City;
+                employeeIsRegistered.Street = newEmployee.Street;
+                employeeIsRegistered.Phone = newEmployee.Phone;
+                context.EmployeeDbSet.Update(employeeIsRegistered);
+                context.SaveChanges();
+            }
+        }
 
 
 
@@ -106,6 +132,7 @@ namespace Project_2.dao
                     Brand = "Ford",
                     Model = "Mondeo " + i,
                     EngineCapacity = (short)new Random().Next(1000, 4500)
+                    /*OwnerID = CarOwner.*/
                 });
             }
             context?.SaveChanges();

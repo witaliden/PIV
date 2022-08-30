@@ -10,6 +10,9 @@
     <UserControl.DataContext>
         <models:Car/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <models:Car x:Key="carData"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="600">
             <GroupBox Header="Wyszukaj" Height="600">
@@ -46,37 +49,71 @@
             <GroupBox Header="Dodaj">
                 <StackPanel HorizontalAlignment="right" Width="250">
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">VIN</TextBlock>
-                    <TextBox Name="newCarVINTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarVINTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="VIN" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Marka</TextBlock>
-                    <TextBox x:Name="newCarBrandTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarBrandTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Brand" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Model</TextBlock>
-                    <TextBox x:Name="newCarModelTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarModelTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Model" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Numer rejestracyjny</TextBlock>
-                    <TextBox Name="newCarRegNumTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarRegNumTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="RegNum" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Pojemność silnika</TextBlock>
-                    <TextBox Name="newCarEngCapTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarEngCapTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="EngineCapacity" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Margin="15,15,10,3" Width="150" HorizontalAlignment="Right">Właściciel (id)</TextBlock>
-                    <TextBox Name="newCarOwnerTextBox" Margin="15,0" Width="200" HorizontalAlignment="Right"></TextBox>
+                    <TextBox Name="newCarOwnerTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="OwnerID" Source="{StaticResource carData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                    <Button x:Name="CarSaveButton" Content="Zapisz" Width="80" HorizontalAlignment="Right" Margin="80,20,10,10" Click="CarSaveButton_Click" Command="{Binding}">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ElementName=newCarVINTextBox}" Value="{x:Null}"/>
-                                            <Condition Binding="{Binding ElementName=newCarBrandTextBox}" Value=""/>
-                                            <Condition Binding="{Binding ElementName=newCarModelTextBox}" Value=""/>
-                                            <Condition Binding="{Binding ElementName=newCarRegNumTextBox}" Value=""/>
-                                            <Condition Binding="{Binding ElementName=newCarEngCapTextBox}" Value=""/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="IsEnabled" Value="True" />
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    <Button x:Name="CarSaveButton" 
+                            Content="Zapisz" 
+                            Width="80" HorizontalAlignment="Right" Margin="80,20,10,10" 
+                            Click="CarSaveButton_Click"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
