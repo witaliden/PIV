@@ -3,17 +3,9 @@ using Project_2.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Project_2.UserControls
 {
@@ -25,7 +17,7 @@ namespace Project_2.UserControls
         CrDbContext context = new CrDbContext();
         GetQueries getQueries = new GetQueries();
         PostQueries postQueries = new PostQueries();
-        List<Trip>? trips = new List<Trip>();
+        ICollection<Trip>? trips = new List<Trip>();
         public TripsUserControl()
         {
             InitializeComponent();
@@ -71,24 +63,39 @@ namespace Project_2.UserControls
         /// <param name="e"></param>
         private void TripSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            postQueries.startTrip(context, Int32.Parse(newTripIdTextBox.Text), new Trip()
+            int? counter = getQueries.GetMaxCounterWithVin(context, newTripCarTextBox.Text);
+            if (counter > Int32.Parse(newTripCounterBeforeTextBox.Text))
             {
-                VIN = newTripCarTextBox.Text,
-                EmployeeID = Int32.Parse(newTripEmployeeIdTextBox.Text),
-                TripPurpose = newTripPurposeTextBox.Text,
-                TakeDateTime = DateTime.Now,
-                ReturnDateTime = null,
-                CounterBefore = Int32.Parse(newTripCounterBeforeTextBox.Text),
-                CounterAfter = 0
-            });
-            MessageBox.Show("Udanego wyjazdu!");
+                MessageBox.Show($"Podany stan licznika jest mniejszy od {counter} zapisanego w bazie");
+            }
+            else if (getQueries.checkIfEmployeeIsInTrip(context, Int32.Parse(newTripEmployeeIdTextBox.Text)))
+            {
+                MessageBox.Show("Wybrany pracownik jest już w trakcie wyjazdu");
+            }
+            else
+            {
+                postQueries.startTrip(context, Int32.Parse(newTripIdTextBox.Text), new Trip()
+                {
+                    VIN = newTripCarTextBox.Text,
+                    EmployeeID = Int32.Parse(newTripEmployeeIdTextBox.Text),
+                    TripPurpose = newTripPurposeTextBox.Text,
+                    TakeDateTime = DateTime.Now,
+                    ReturnDateTime = null,
+                    CounterBefore = Int32.Parse(newTripCounterBeforeTextBox.Text),
+                    CounterAfter = 0
+                });
+                MessageBox.Show("Udanego wyjazdu!");
+
+            }
         }
 
         private void QuickTripFinish(object sender, RoutedEventArgs e)
         {
-            if (Int32.Parse(TripEndCounterAfterTextBox.Text) < getQueries.GetTripById(context, Int32.Parse(TripEndIdTextBox.Text)).CounterBefore){
+            if (Int32.Parse(TripEndCounterAfterTextBox.Text) < getQueries.GetTripById(context, Int32.Parse(TripEndIdTextBox.Text)).CounterBefore)
+            {
                 MessageBox.Show("Stan licznika jest mniejszy niż przed wyjazdem.");
-            } else
+            }
+            else
             {
                 postQueries.quickTripFinish(context, Int32.Parse(TripEndIdTextBox.Text), Int32.Parse(TripEndCounterAfterTextBox.Text));
                 MessageBox.Show("Witamy z powrotem!");

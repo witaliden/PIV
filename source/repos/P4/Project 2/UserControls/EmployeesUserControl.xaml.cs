@@ -17,7 +17,7 @@ namespace Project_2.UserControls
         CrDbContext context = new CrDbContext();
         GetQueries getQueries = new GetQueries();
         PostQueries postQueries = new PostQueries();
-        List<Employee>? employees = new List<Employee>();
+        ICollection<Employee>? employees = new List<Employee>();
         public EmployeesUserControl()
         {
             InitializeComponent();

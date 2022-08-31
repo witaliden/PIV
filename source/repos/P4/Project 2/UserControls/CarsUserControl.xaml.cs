@@ -18,16 +18,11 @@ namespace Project_2.UserControls
         CrDbContext context = new CrDbContext();
         GetQueries getQueries = new GetQueries();
         PostQueries postQueries = new PostQueries();
-        List<Car>? cars = new List<Car>();
+        ICollection<Car>? cars = new List<Car>();
 
         public CarsUserControl()
         {
             InitializeComponent();
-        }
-
-        private void AddComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SearchCarListView.Items.Clear();
         }
         /// <summary>
         /// Wyszukiwanie samomochodów według wypełnionych filtrów

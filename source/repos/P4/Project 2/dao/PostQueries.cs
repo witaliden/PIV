@@ -47,20 +47,18 @@ namespace Project_2.dao
 
         public void startTrip(CrDbContext context, int newTripId, Trip trip)
         {
-            var tripExists = context.TripDbSet.FirstOrDefault(t => t.TripID == newTripId);
-            var employeeInTrip = context.TripDbSet.FirstOrDefault(t => t.EmployeeID.Equals(newTripId) && t.ReturnDateTime.Equals(null));
+            var tripExists = context.TripDbSet.FirstOrDefault(t => t.TripID == newTripId && t.ReturnDateTime == null);
             var car = context.CarDbSet.FirstOrDefault(c => c.VIN.Equals(trip.VIN));
 
-            if (employeeInTrip == null && tripExists == null)
+            if (tripExists == null)
             {
                 context.TripDbSet.Add(trip);
                 car.Availability = "Wypożyczony";
                 context.CarDbSet.Update(car);
                 context.SaveChanges();
             }
-
             //update istniejącej podróży
-            else if ((employeeInTrip == null && tripExists != null) || (employeeInTrip != null && tripExists.TripID == newTripId))
+            else if(tripExists != null)
             {
                 tripExists.VIN = trip.VIN;
                 tripExists.EmployeeID = trip.EmployeeID;
@@ -69,12 +67,6 @@ namespace Project_2.dao
 
                 context.TripDbSet.Update(tripExists);
                 context.SaveChanges();
-            }
-            //próba dodania pracownika, który ma niezwrócony samochód, do nowej podróży
-            else
-            {
-                //zastanowić się nad implementacją
-                Console.WriteLine("Nie można dodać do podróży pracownika, który jest w trakcie innego wyjazdu.");
             }
         }
 

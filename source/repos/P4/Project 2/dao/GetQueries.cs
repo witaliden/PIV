@@ -60,6 +60,11 @@ namespace Project_2.dao
             return context!.EmployeeDbSet != null ? context.EmployeeDbSet.Where(a => a.Dl_Id > 0).ToList() : null!;
         }
 
+        public bool checkIfEmployeeIsInTrip(CrDbContext context, int employeeId)
+        {
+            return context.TripDbSet.Any(t => t.employeeID == employeeId && t.ReturnDateTime == null);
+        }
+
         public List<int> GetAllEmployeesId(CrDbContext context)
         {
             return context.EmployeeDbSet.Select(a => a.EmployeeID).ToList()!;
@@ -114,6 +119,11 @@ namespace Project_2.dao
         {
             return context.TripDbSet.FirstOrDefault(e => e.EmployeeID == employeeId && e.ReturnDateTime == null);
             //Przejazdy activeTrip = context.PrzejazdyDbSet.Single(e => e.PracownikId == employeeId && e.DataCzasZwrotu == null);
+        }
+
+        public int? GetMaxCounterWithVin(CrDbContext context, string vin)
+        {
+            return context.TripDbSet.Where(t => t.VIN.Equals(vin)).Max(t => t.CounterAfter);
         }
 
         /// <summary>
