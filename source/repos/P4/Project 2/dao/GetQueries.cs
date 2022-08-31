@@ -53,24 +53,16 @@ namespace Project_2.dao
 
         public List<Employee> GetAllEmployees(CrDbContext context)
         {
-            if (context!.EmployeeDbSet == null) return null!;
-            var employees = context.EmployeeDbSet.ToList();
-            return employees;
+            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.ToList() : null!;
         }
         public List<Employee> GetEmployeesWithDriverLicense(CrDbContext context)
         {
-            if (context!.EmployeeDbSet == null) return null!;
-            var employees = context.EmployeeDbSet
-                .Where(a => a.Dl_Id > 0).ToList();
-            return employees;
+            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.Where(a => a.Dl_Id > 0).ToList() : null!;
         }
 
         public List<int> GetAllEmployeesId(CrDbContext context)
         {
-            if (context!.EmployeeDbSet == null) return null!;
-            var employeeIDs = context.EmployeeDbSet
-                .Select(a => a.EmployeeID).ToList();
-            return employeeIDs;
+            return context.EmployeeDbSet.Select(a => a.EmployeeID).ToList()!;
         }
 
         /// <summary>
@@ -80,60 +72,52 @@ namespace Project_2.dao
         /// <param name="keyWord">słowo kluczowe wg którego jest poszukiwany pracownik</param>
         public List<Employee>? GetEmployeeByLastname(CrDbContext context, string keyWord)
         {
-            return context.EmployeeDbSet == null ? null : context.EmployeeDbSet
-                .Where(a => a.LastName!.Contains(keyWord)).ToList();
+            return context.EmployeeDbSet != null ? context.EmployeeDbSet
+                .Where(a => a.LastName!.Contains(keyWord)).ToList() : null;
         }
         public Employee? GetEmployeeById(CrDbContext context, int keyWord)
         {
-            return context.EmployeeDbSet == null ? null : context.EmployeeDbSet.FirstOrDefault(a => a.EmployeeID == keyWord);
+            return context.EmployeeDbSet != null ? context.EmployeeDbSet.FirstOrDefault(a => a.EmployeeID == keyWord) : null;
         }
 
         //================================================
         //Trips
         //================================================
 
+
+        public List<Trip>? GetAllTrips(CrDbContext context)
+        {
+            return context!.TripDbSet.ToList();
+        }
+
         /// <summary>
         /// Funkcja wyświetla listę wyjazdów, którzy nie mają podanej daty zwrotu.
         /// </summary>
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
-        public void GetActiveTrips(CrDbContext context)
+        public List<Trip>? GetActiveTrips(CrDbContext context)
         {
-            if (context.TripDbSet is null)
-            {
-                Console.WriteLine("Brak zapisanych wyjazdów");
-                return;
-            }
-            else
-            {
-                var activeTrips = context.TripDbSet!
-                    .Include(p => p.Employee)
-                    .Where(w => w.ReturnDateTime == null)
-                    .ToList();
-                foreach (var trip in activeTrips)
-                {
-                    Console.WriteLine("\n" + Environment.NewLine);
-                    Console.WriteLine($"Podróz z ID: {trip.TripID} od {trip.TakeDateTime}");
-                    Console.WriteLine($"Pracownik: {trip.Employee.FirstName} {trip.Employee.LastName} ({trip.Employee.JobTitle})");
-                }
-            }
+            return context.TripDbSet!.Where(w => w.ReturnDateTime == null).ToList();
+        }
+
+        public Trip? GetTripById(CrDbContext context, int tripId)
+        {
+            return context.TripDbSet!.FirstOrDefault(t => t.TripID == tripId);
         }
 
         /// <summary>
-        /// Funkcja sprawdza czy pracownik ma niezakończony wyjazd (brak daty zwrotu samochodu).
+        /// Funkcja zwraca niezakończony (brak daty zwrotu samochodu) wyjazd pracownika.
         /// </summary>
         /// <param name="context">objekt DbContext przekazywany do funkcji jako parametr</param>
         /// <param name="employeeId">id pracownika którego sprawdzamy</param>
         /// <returns>Wynik jest zwracany jako objekt klasy Przejazd</returns>
-        public Trip GetEmployeesActiveTrip(CrDbContext context, int employeeId)
+        public Trip? GetEmployeesActiveTrips(CrDbContext context, int employeeId)
         {
-            if (context!.TripDbSet == null) return null;
-            Trip activeTrip = context.TripDbSet.FirstOrDefault(e => e.EmployeeID == employeeId && e.ReturnDateTime == null);
+            return context.TripDbSet.FirstOrDefault(e => e.EmployeeID == employeeId && e.ReturnDateTime == null);
             //Przejazdy activeTrip = context.PrzejazdyDbSet.Single(e => e.PracownikId == employeeId && e.DataCzasZwrotu == null);
-            return activeTrip;
         }
 
         /// <summary>
-        /// Funkcja zwraca id niezakończonego wyjazdu pracownika (brak daty zwrotu samochodu).
+        /// Funkcja zwraca id niezakończonego (brak daty zwrotu samochodu) wyjazdu pracownika.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="employeeId"></param>

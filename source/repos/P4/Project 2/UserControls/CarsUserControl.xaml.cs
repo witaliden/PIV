@@ -25,7 +25,7 @@ namespace Project_2.UserControls
             InitializeComponent();
         }
 
-        private void AddComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void AddComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SearchCarListView.Items.Clear();
         }

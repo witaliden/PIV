@@ -27,7 +27,7 @@ namespace Project_2.model
         [Required, MaxLength(4)]
         public short engineCapacity;
 
-        
+
         /*public int OwnerID { get; set; }
         [ForeignKey("OwnerID")]
         public virtual CarOwner CarOwner { get; set; } = null!;*/
@@ -141,7 +141,7 @@ namespace Project_2.model
                             return "Podaj model";
                         break;
                     case "RegNum":
-                        if (string.IsNullOrEmpty(this.RegNum) || this.RegNum.Length < 3 || this.RegNum.Length > 7 )
+                        if (string.IsNullOrEmpty(this.RegNum) || this.RegNum.Length < 3 || this.RegNum.Length > 7)
                             return "Podaj numer rejestracyjny";
                         break;
                     case "EngineCapacity":

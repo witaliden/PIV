@@ -30,11 +30,11 @@ namespace Project_2.UserControls
         /// <param name="e"></param>
         private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            employees = EmployeeHasDlSearchToggleBtn.IsChecked == true ? getQueries.GetEmployeesWithDriverLicense(context): getQueries.GetAllEmployees(context);
+            employees = EmployeeHasDlSearchToggleBtn.IsChecked == true ? getQueries.GetEmployeesWithDriverLicense(context) : getQueries.GetAllEmployees(context);
             employees = EmployeeSearchId.Text.Length > 0 ? employees.Where(x => x.EmployeeID.ToString().Contains(EmployeeSearchId.Text)).ToList() : employees;
             employees = EmployeeSearchFirstName.Text.Length > 0 ? employees.Where(x => x.FirstName.Contains(EmployeeSearchFirstName.Text)).ToList() : employees;
             employees = EmployeeSearchLastName.Text.Length > 0 ? employees.Where(x => x.LastName.Contains(EmployeeSearchLastName.Text)).ToList() : employees;
-            employees = EmployeeSearchPESEL.Text.Length > 0 ? employees.Where(x => x.PESEL.ToString().Contains(EmployeeSearchPESEL.Text)).ToList() : employees;
+            employees = EmployeeSearchPESEL.Text.Length > 0 ? employees.Where(x => x.Pesel.ToString().Contains(EmployeeSearchPESEL.Text)).ToList() : employees;
             employees = EmployeeSearchGender.Text.Length > 0 ? employees.Where(x => x.Gender.Contains(EmployeeSearchGender.Text)).ToList() : employees;
             employees = EmployeeSearchJobTitle.Text.Length > 0 ? employees.Where(x => x.JobTitle.Contains(EmployeeSearchJobTitle.Text)).ToList() : employees;
             employees = EmployeeSearchCity.Text.Length > 0 ? employees.Where(x => x.City.Contains(EmployeeSearchCity.Text)).ToList() : employees;
@@ -55,7 +55,7 @@ namespace Project_2.UserControls
             newEmployeeIDTextBox.Text = SelectedEmployee.EmployeeID.ToString();
             newEmployeeFirstNameTextBox.Text = SelectedEmployee.FirstName;
             newEmployeeLastNameTextBox.Text = SelectedEmployee.LastName;
-            newEmployeePeselTextBox.Text = SelectedEmployee.PESEL.ToString();
+            newEmployeePeselTextBox.Text = SelectedEmployee.Pesel.ToString();
             newEmployeeGenderTextBox.Text = SelectedEmployee.Gender;
             newEmployeeJobTitleTextBox.Text = SelectedEmployee.JobTitle;
             newEmployeeDL_IDTextBox.Text = SelectedEmployee.Dl_Id.ToString();
@@ -66,18 +66,17 @@ namespace Project_2.UserControls
 
         public void EmployeeSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            postQueries.AddEmployee(context, new Employee()
+            postQueries.AddEmployee(context, Int32.Parse(newEmployeeIDTextBox.Text), new Employee()
             {
-                EmployeeID = Int32.Parse(newEmployeeIDTextBox.Text),
-            FirstName = newEmployeeFirstNameTextBox.Text,
-            LastName = newEmployeeLastNameTextBox.Text,
-            PESEL = Int32.Parse(newEmployeePeselTextBox.Text),
-            JobTitle = newEmployeeJobTitleTextBox.Text,
-            Dl_Id = Int32.Parse(newEmployeeDL_IDTextBox.Text),
-            Gender = newEmployeeGenderTextBox.Text,
-            City = newEmployeeCityTextBox.Text,
-            Street = newEmployeeStreetTextBox.Text,
-            Phone = newEmployeePhoneTextBox.Text });
+                FirstName = newEmployeeFirstNameTextBox.Text,
+                LastName = newEmployeeLastNameTextBox.Text,
+                Pesel = Int64.Parse(newEmployeePeselTextBox.Text),
+                JobTitle = newEmployeeJobTitleTextBox.Text,
+                Dl_Id = Int32.Parse(newEmployeeDL_IDTextBox.Text),
+                Gender = newEmployeeGenderTextBox.Text,
+                City = newEmployeeCityTextBox.Text,
+                Street = newEmployeeStreetTextBox.Text,
+                Phone = newEmployeePhoneTextBox.Text });
 
         }
     }

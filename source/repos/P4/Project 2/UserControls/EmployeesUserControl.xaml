@@ -88,7 +88,7 @@
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">PESEL</TextBlock>
                     <TextBox Name="newEmployeePeselTextBox" Style="{StaticResource RightGroupTextBox}">
                         <TextBox.Text>
-                            <Binding Path="PESEL" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="Pesel" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <DataErrorValidationRule/>
                                 </Binding.ValidationRules>

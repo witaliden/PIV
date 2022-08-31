@@ -40,44 +40,55 @@ namespace Project_2.dao
             return getQueries.GetCarsByVinLike(context, checkedCar.VIN).Any();
         }
 
+
         //
         //Trips
         //
 
-        public void takeCar(CrDbContext context, int employeeID)
+        public void startTrip(CrDbContext context, int newTripId, Trip trip)
         {
-            Car tempCar = context.CarDbSet.Where(c => c.Availability.Equals("Dostępny")).First();
-            int? counter = context.TripDbSet.Where(c => c.VIN.Equals(tempCar.VIN)).Max(l => l.CounterAfter);
+            var tripExists = context.TripDbSet.FirstOrDefault(t => t.TripID == newTripId);
+            var employeeInTrip = context.TripDbSet.FirstOrDefault(t => t.EmployeeID.Equals(newTripId) && t.ReturnDateTime.Equals(null));
+            var car = context.CarDbSet.FirstOrDefault(c => c.VIN.Equals(trip.VIN));
 
-            Trip newTrip = new Trip
+            if (employeeInTrip == null && tripExists == null)
             {
-                Employee = context.EmployeeDbSet.Find(employeeID),
-                VIN = tempCar.VIN,
-                TakeDateTime = DateTime.Now,
-                CounterBefore = counter == null ? 0 : counter.Value
-            };
-            context.TripDbSet.Add(newTrip);
-            tempCar.Availability = "Wypożyczony";
-            context.SaveChanges();
-        }
-
-        public void finishTrip(CrDbContext context, int tripID, int newCounterState)
-        {
-            var trip = context.TripDbSet.Find(tripID);
-            if (trip == null)
-            {
-                string temp = "Nie znaleziono podróży o podanym ID " + tripID;
-                return;
+                context.TripDbSet.Add(trip);
+                car.Availability = "Wypożyczony";
+                context.CarDbSet.Update(car);
+                context.SaveChanges();
             }
+
+            //update istniejącej podróży
+            else if ((employeeInTrip == null && tripExists != null) || (employeeInTrip != null && tripExists.TripID == newTripId))
+            {
+                tripExists.VIN = trip.VIN;
+                tripExists.EmployeeID = trip.EmployeeID;
+                tripExists.TripPurpose = trip.TripPurpose;
+                tripExists.CounterBefore = trip.CounterBefore;
+
+                context.TripDbSet.Update(tripExists);
+                context.SaveChanges();
+            }
+            //próba dodania pracownika, który ma niezwrócony samochód, do nowej podróży
             else
             {
-                var updatedCar = context.CarDbSet.Find(trip.VIN);
-                trip.CounterAfter = newCounterState;
-                trip.ReturnDateTime = DateTime.Now;
-                context.TripDbSet.Update(trip);
+                //zastanowić się nad implementacją
+                Console.WriteLine("Nie można dodać do podróży pracownika, który jest w trakcie innego wyjazdu.");
+            }
+        }
 
-                updatedCar.Availability = "Dostępny";
-                context.CarDbSet.Update(updatedCar);
+        public void quickTripFinish(CrDbContext context, int tripId, int currentCounterState)
+        {
+            var trip = context.TripDbSet.FirstOrDefault(t => t.TripID == tripId);
+            if (trip.CounterBefore < currentCounterState)
+            {
+                var car = context.CarDbSet.FirstOrDefault(c => c.VIN.Equals(trip.VIN));
+                trip.counterAfter = currentCounterState;
+                trip.ReturnDateTime = DateTime.Now;
+                car.Availability = "Dostępny";
+                context.CarDbSet.Update(car);
+                context.TripDbSet.Update(trip);
                 context.SaveChanges();
             }
         }
@@ -86,9 +97,9 @@ namespace Project_2.dao
         //
         // Employees
         //
-        public void AddEmployee(CrDbContext context, Employee newEmployee)
+        public void AddEmployee(CrDbContext context, int newEmployeeId, Employee newEmployee)
         {
-            var employeeIsRegistered = getQueries.GetEmployeeById(context, newEmployee.EmployeeID);
+            var employeeIsRegistered = getQueries.GetEmployeeById(context, newEmployeeId);
             if (employeeIsRegistered == null)
             {
                 context.EmployeeDbSet.Add(newEmployee);
@@ -96,10 +107,10 @@ namespace Project_2.dao
             }
             else
             {
-                employeeIsRegistered.EmployeeID = newEmployee.EmployeeID;
+                //employeeIsRegistered.EmployeeID = newEmployee.EmployeeID;
                 employeeIsRegistered.FirstName = newEmployee.FirstName;
                 employeeIsRegistered.LastName = newEmployee.LastName;
-                employeeIsRegistered.PESEL = newEmployee.PESEL;
+                employeeIsRegistered.Pesel = newEmployee.Pesel;
                 employeeIsRegistered.JobTitle = newEmployee.JobTitle;
                 employeeIsRegistered.Dl_Id = newEmployee.Dl_Id;
                 employeeIsRegistered.Gender = newEmployee.Gender;
@@ -110,10 +121,6 @@ namespace Project_2.dao
                 context.SaveChanges();
             }
         }
-
-
-
-
 
 
 
@@ -141,19 +148,19 @@ namespace Project_2.dao
         //wypełnienie tabeli pracowników
         public void FillEmployees(CrDbContext context)
         {
-            //var tempAuthorList = GetQueries.GetAllEmployeesId(context);
-            var randomizerFirstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName());
-            var randomizerLastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName());
             for (var i = 1; i <= 10; i++)
             {
                 context!.EmployeeDbSet!.Add(new Employee()
                 {
-                    //PracownikId = i,
-                    PESEL = new Random().NextInt64(10000000000, 99999999999),
-                    FirstName = randomizerFirstName.Generate().Trim(),
-                    LastName = randomizerLastName.Generate().Trim(),
+                    Pesel = new Random().NextInt64(10000000000, 99999999999),
+                    FirstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName()).Generate().Trim(),
+                    LastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate().Trim(),
                     Gender = Randomizer.RandomGender(),
-                    JobTitle = "Wdrożeniowiec".Trim()
+                    JobTitle = "Wdrożeniowiec".Trim(),
+                    Dl_Id = new Random().Next(1, 20),
+                    City = RandomizerFactory.GetRandomizer(new FieldOptionsCity()).Generate().Trim(),
+                    Street = RandomizerFactory.GetRandomizer(new FieldOptionsCountry()).Generate().Trim(),
+                    Phone = new Random().NextInt64(100000000, 999999999).ToString()
                 });
             }
             context?.SaveChanges();

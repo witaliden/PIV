@@ -18,7 +18,7 @@ namespace Project_2
         {
             context.Database.EnsureCreated();
             postQueries.FillCars(context);
-            //postQueries.FillEmployees(context);
+            postQueries.FillEmployees(context);
             InitializeComponent();
         }      
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_2" xmlns:tabs="clr-namespace:Project_2.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="1000" Style="{DynamicResource WindowStyle}">
+        Title="MainWindow" Height="800" Width="1100" Style="{DynamicResource WindowStyle}">
 
     <Grid>
         <Border CornerRadius="10"

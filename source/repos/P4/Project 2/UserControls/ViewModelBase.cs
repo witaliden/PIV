@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_2.UserControls
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
