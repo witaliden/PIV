@@ -47,7 +47,7 @@ namespace Project_2.dao
 
         public void startTrip(CrDbContext context, int newTripId, Trip trip)
         {
-            var tripExists = context.TripDbSet.FirstOrDefault(t => t.TripID == newTripId && t.ReturnDateTime == null);
+            var tripExists = newTripId > 0 ? context.TripDbSet.FirstOrDefault(t => t.TripID == newTripId && t.ReturnDateTime == null) : null;
             var car = context.CarDbSet.FirstOrDefault(c => c.VIN.Equals(trip.VIN));
 
             if (tripExists == null)

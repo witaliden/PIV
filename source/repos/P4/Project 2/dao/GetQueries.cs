@@ -30,7 +30,12 @@ namespace Project_2.dao
         {
             return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.Availability.Equals("Dostępny")).ToList();
         }
-
+        /// <summary>
+        /// Funkcja zwraca listę objektów typu Car z podanym vin
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="vin"></param>
+        /// <returns></returns>
         public List<Car>? GetCarsByVinLike(CrDbContext context, string vin)
         {
             return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.VIN.Contains(vin)).ToList();
@@ -39,6 +44,10 @@ namespace Project_2.dao
         public Car? GetCarsByVin(CrDbContext context, string vin)
         {
             return context.CarDbSet is null ? null : context.CarDbSet!.Where(w => w.VIN.Equals(vin)).FirstOrDefault();
+        }
+        public bool checkIfCarIsAvailable(CrDbContext context, string vin)
+        {
+            return (context.CarDbSet!.Any(c => c.VIN.Equals(vin) && c.Availability.Contains("dost")) && context.TripDbSet.Any(t => t.VIN.Equals(vin) && t.ReturnDateTime != null));
         }
 
         //================================================
@@ -62,7 +71,7 @@ namespace Project_2.dao
 
         public bool checkIfEmployeeIsInTrip(CrDbContext context, int employeeId)
         {
-            return context.TripDbSet.Any(t => t.employeeID == employeeId && t.ReturnDateTime == null);
+            return context.TripDbSet.Any(t => t.EmployeeID == employeeId && t.ReturnDateTime == null);
         }
 
         public List<int> GetAllEmployeesId(CrDbContext context)

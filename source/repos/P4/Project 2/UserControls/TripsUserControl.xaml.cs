@@ -72,9 +72,13 @@ namespace Project_2.UserControls
             {
                 MessageBox.Show("Wybrany pracownik jest już w trakcie wyjazdu");
             }
+            else if (!getQueries.checkIfCarIsAvailable(context, newTripCarTextBox.Text))
+            {
+                MessageBox.Show("Wybrany samochód nie jest dostępny");
+            }
             else
             {
-                postQueries.startTrip(context, Int32.Parse(newTripIdTextBox.Text), new Trip()
+                postQueries.startTrip(context, (newTripIdTextBox.Text.Length > 0 ? int.Parse(newTripIdTextBox.Text) : 0), new Trip()
                 {
                     VIN = newTripCarTextBox.Text,
                     EmployeeID = Int32.Parse(newTripEmployeeIdTextBox.Text),
