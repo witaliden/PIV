@@ -21,5 +21,15 @@ namespace Project_2.dao
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JJ2EHR8\SQLEXPRESS;Initial Catalog=Project2_WD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>()
+                .HasOne(a => a.EmployeeDriverLicense)
+                .WithOne(b => b.DLEmployee)
+                .HasForeignKey<DriverLicense>(b => b.EmployeeID);
+        }
+
+
     }
 }

@@ -62,11 +62,11 @@ namespace Project_2.dao
 
         public List<Employee> GetAllEmployees(CrDbContext context)
         {
-            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.ToList() : null!;
+            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.Include(x => x.EmployeeDriverLicense).ToList() : null!;
         }
         public List<Employee> GetEmployeesWithDriverLicense(CrDbContext context)
         {
-            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.Where(a => a.Dl_Id > 0).ToList() : null!;
+            return context!.EmployeeDbSet != null ? context.EmployeeDbSet.Where(a => a.employeeDlId > 0).ToList() : null!;
         }
 
         public bool checkIfEmployeeIsInTrip(CrDbContext context, int employeeId)

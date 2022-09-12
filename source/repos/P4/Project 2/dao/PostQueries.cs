@@ -104,11 +104,14 @@ namespace Project_2.dao
                 employeeIsRegistered.LastName = newEmployee.LastName;
                 employeeIsRegistered.Pesel = newEmployee.Pesel;
                 employeeIsRegistered.JobTitle = newEmployee.JobTitle;
-                employeeIsRegistered.Dl_Id = newEmployee.Dl_Id;
+                employeeIsRegistered.employeeDlId = newEmployee.employeeDlId;
                 employeeIsRegistered.Gender = newEmployee.Gender;
                 employeeIsRegistered.City = newEmployee.City;
                 employeeIsRegistered.Street = newEmployee.Street;
                 employeeIsRegistered.Phone = newEmployee.Phone;
+                employeeIsRegistered.EmployeeDriverLicense.Category1 = newEmployee.EmployeeDriverLicense.Category1;
+                employeeIsRegistered.EmployeeDriverLicense.Category2 = newEmployee.EmployeeDriverLicense.Category2;
+                employeeIsRegistered.EmployeeDriverLicense.Description = newEmployee.EmployeeDriverLicense.Description;
                 context.EmployeeDbSet.Update(employeeIsRegistered);
                 context.SaveChanges();
             }
@@ -149,7 +152,7 @@ namespace Project_2.dao
                     LastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate().Trim(),
                     Gender = Randomizer.RandomGender(),
                     JobTitle = "Wdrożeniowiec".Trim(),
-                    Dl_Id = new Random().Next(1, 20),
+                    employeeDlId = new Random().Next(1, 20),
                     City = RandomizerFactory.GetRandomizer(new FieldOptionsCity()).Generate().Trim(),
                     Street = RandomizerFactory.GetRandomizer(new FieldOptionsCountry()).Generate().Trim(),
                     Phone = new Random().NextInt64(100000000, 999999999).ToString()

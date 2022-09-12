@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Project_2.UserControls"
              xmlns:models="clr-namespace:Project_2.model"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1000">
+             d:DesignHeight="700" d:DesignWidth="1300">
     <UserControl.DataContext>
         <models:Employee/>
     </UserControl.DataContext>
@@ -41,7 +41,7 @@
                                 <GridViewColumn Header="PESEL" DisplayMemberBinding="{Binding PESEL}"/>
                                 <GridViewColumn Header="Płeć" DisplayMemberBinding="{Binding Gender}"/>
                                 <GridViewColumn Header="Stanowisko" DisplayMemberBinding="{Binding JobTitle}"/>
-                                <GridViewColumn Header="PJ" DisplayMemberBinding="{Binding DL_ID}"/>
+                                <GridViewColumn Header="PJ" DisplayMemberBinding="{Binding employeeDlId}"/>
                                 <GridViewColumn Header="Miejscowość" DisplayMemberBinding="{Binding City}"/>
                                 <GridViewColumn Header="Ulica" DisplayMemberBinding="{Binding Street}"/>
                                 <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding Phone}"/>
@@ -52,9 +52,9 @@
             </GroupBox>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Right">
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="500" >
             <GroupBox Header="Dodaj">
-                <StackPanel HorizontalAlignment="right" Width="250">
+                <StackPanel HorizontalAlignment="Left" Width="250">
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">ID</TextBlock>
                     <TextBox Name="newEmployeeIDTextBox" Style="{StaticResource RightGroupTextBox}">
                         <TextBox.Text>
@@ -161,6 +161,40 @@
                             Content="Zapisz" 
                             Width="80" HorizontalAlignment="Right" Margin="80,20,10,10"
                             Click="EmployeeSaveButton_Click"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Prawo jazdy">
+                <StackPanel HorizontalAlignment="right" Width="230">
+                    <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Kategoria 1</TextBlock>
+                    <TextBox Name="newEmployeeDlCategory1TextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Employee.DriverLicense.Category1" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Kategoria 2</TextBlock>
+                    <TextBox Name="newEmployeeDlCategory2TextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Employee.DriverLicense.Category2" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">Opis</TextBlock>
+                    <TextBox Name="newEmployeeDlDescriptionTextBox" Style="{StaticResource RightGroupTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Employee.DriverLicense.Description" Source="{StaticResource employeeData}" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

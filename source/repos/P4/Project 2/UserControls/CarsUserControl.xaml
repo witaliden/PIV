@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Project_2.UserControls"
              xmlns:models="clr-namespace:Project_2.model"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1000">
+             d:DesignHeight="700" d:DesignWidth="1300">
     <UserControl.DataContext>
         <models:Car/>
     </UserControl.DataContext>
@@ -45,7 +45,7 @@
             </GroupBox>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Right">
+        <StackPanel HorizontalAlignment="Right" Width="500">
             <GroupBox Header="Dodaj">
                 <StackPanel HorizontalAlignment="right" Width="250">
                     <TextBlock Margin="20,15,10,3" Width="150" HorizontalAlignment="Right">VIN</TextBlock>

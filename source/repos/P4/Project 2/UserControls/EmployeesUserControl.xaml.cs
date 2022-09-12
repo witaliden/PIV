@@ -58,25 +58,34 @@ namespace Project_2.UserControls
             newEmployeePeselTextBox.Text = SelectedEmployee.Pesel.ToString();
             newEmployeeGenderTextBox.Text = SelectedEmployee.Gender;
             newEmployeeJobTitleTextBox.Text = SelectedEmployee.JobTitle;
-            newEmployeeDL_IDTextBox.Text = SelectedEmployee.Dl_Id.ToString();
             newEmployeeCityTextBox.Text = SelectedEmployee.City;
             newEmployeeStreetTextBox.Text = SelectedEmployee.Street;
             newEmployeePhoneTextBox.Text = SelectedEmployee.Phone;
+            newEmployeeDlCategory1TextBox.Text = SelectedEmployee.EmployeeDriverLicense.Category1 != null ? SelectedEmployee.EmployeeDriverLicense.Category1 : "empty";
+            newEmployeeDlCategory2TextBox.Text = SelectedEmployee.EmployeeDriverLicense.Category2 != null ? SelectedEmployee.EmployeeDriverLicense.Category2 : "empty";
+            newEmployeeDlDescriptionTextBox.Text = SelectedEmployee.EmployeeDriverLicense.Description! != null ? SelectedEmployee.EmployeeDriverLicense.Description : "0";
         }
 
         public void EmployeeSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            postQueries.AddEmployee(context, Int32.Parse(newEmployeeIDTextBox.Text), new Employee()
+            postQueries.AddEmployee(context, int.Parse(newEmployeeIDTextBox.Text), new Employee()
             {
                 FirstName = newEmployeeFirstNameTextBox.Text,
                 LastName = newEmployeeLastNameTextBox.Text,
                 Pesel = Int64.Parse(newEmployeePeselTextBox.Text),
                 JobTitle = newEmployeeJobTitleTextBox.Text,
-                Dl_Id = Int32.Parse(newEmployeeDL_IDTextBox.Text),
+                //employeeDlId = Int32.Parse(newEmployeeDL_IDTextBox.Text),
                 Gender = newEmployeeGenderTextBox.Text,
                 City = newEmployeeCityTextBox.Text,
                 Street = newEmployeeStreetTextBox.Text,
-                Phone = newEmployeePhoneTextBox.Text });
+                Phone = newEmployeePhoneTextBox.Text,
+                EmployeeDriverLicense = new DriverLicense()
+                {
+                    Category1 = newEmployeeDlCategory1TextBox.Text,
+                    Category2 = newEmployeeDlCategory2TextBox.Text,
+                    Description = newEmployeeDlDescriptionTextBox.Text
+                }
+            });
 
         }
     }

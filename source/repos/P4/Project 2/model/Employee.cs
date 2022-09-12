@@ -11,7 +11,7 @@ namespace Project_2.model
     {
         public Employee()
         {
-            EmployeeTrip = new HashSet<Trip>();
+            EmployeeTrips = new HashSet<Trip>();
         }
 
         [Key]
@@ -31,15 +31,14 @@ namespace Project_2.model
         public string Street { get; set; }
         public string Phone { get; set; }
 
-        [ForeignKey("Dl_Id")]
-        public int Dl_Id;
-        public virtual DriverLicense DriverLicense { get; set; }
-        public virtual ICollection<Trip> EmployeeTrip { get; set; }
+        [ForeignKey("employeeDlId")]
+        public int employeeDlId;
+        public virtual DriverLicense EmployeeDriverLicense { get; set; }
+        public virtual ICollection<Trip> EmployeeTrips { get; set; }
 
+        #region getter-setter NotifyPropertyChanged
+        
         public event PropertyChangedEventHandler? PropertyChanged;
-
-
-        #region construktors
 
         public long Pesel
         {
@@ -83,13 +82,13 @@ namespace Project_2.model
                 }
             }
         }
-        #endregion construktors
-
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
+
+        #endregion getter-setter NotifyPropertyChanged
 
         #region IDataErrorInfo Members
 
