@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace Project_2.model
 {
@@ -36,20 +37,20 @@ namespace Project_2.model
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
-        #region construktors
+        #region setters and getters
 
         public string Model
         {
             get
             {
-                return this.model;
+                return model;
             }
             set
             {
-                if (this.model != value)
+                if (model != value)
                 {
-                    this.model = value;
-                    this.NotifyPropertyChanged(Model);
+                    model = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -57,62 +58,61 @@ namespace Project_2.model
         {
             get
             {
-                return this.brand;
+                return brand;
             }
             set
             {
-                if (this.brand != value)
+                if (brand != value)
                 {
-                    this.brand = value;
-                    this.NotifyPropertyChanged(Brand);
+                    brand = value;
+                    OnPropertyChanged();
                 }
             }
         }
         public string RegNum
         {
-            get { return this.regNum; }
+            get { return regNum; }
             set
             {
-                if (this.regNum != value)
+                if (regNum != value)
                 {
-                    this.regNum = value;
-                    this.NotifyPropertyChanged(RegNum);
+                    regNum = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
         public short EngineCapacity
         {
-            get { return this.engineCapacity; }
+            get { return engineCapacity; }
             set
             {
-                if (this.engineCapacity != value)
+                if (engineCapacity != value)
                 {
-                    this.engineCapacity = value;
-                    this.NotifyPropertyChanged(EngineCapacity.ToString());
+                    engineCapacity = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
         public string Availability
         {
-            get { return this.availability; }
+            get { return availability; }
             set
             {
-                if (this.availability != value)
+                if (availability != value)
                 {
-                    this.availability = value;
-                    this.NotifyPropertyChanged(Availability);
+                    availability = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
-        #endregion construktors
+        #endregion setters and getters
 
-        public void NotifyPropertyChanged(string propName)
+        public void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         #region IDataErrorInfo Members

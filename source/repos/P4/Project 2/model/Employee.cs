@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project_2.model
 {
+    [AddINotifyPropertyChangedInterface]
     [Table("Employees")]
     public class Employee : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -17,7 +19,7 @@ namespace Project_2.model
         [Key]
         [Required]
         public int EmployeeID { get; set; }
-        [Required, MaxLength(11)]
+        [Required, MinLength(11), MaxLength(11)]
         public long pesel;
         [Required, MaxLength(30)]
         public string firstName;
@@ -39,20 +41,20 @@ namespace Project_2.model
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
-        #region construktors
+        #region setters and getters
 
         public long Pesel
         {
             get
             {
-                return this.pesel;
+                return pesel;
             }
             set
             {
-                if (this.pesel != value)
+                if (pesel != value)
                 {
-                    this.pesel = value;
-                    this.NotifyPropertyChanged(Pesel.ToString());
+                    pesel = value;
+                    NotifyPropertyChanged(Pesel.ToString());
                 }
             }
         }
@@ -60,35 +62,35 @@ namespace Project_2.model
         {
             get
             {
-                return this.firstName;
+                return firstName;
             }
             set
             {
-                if (this.firstName != value)
+                if (firstName != value)
                 {
-                    this.firstName = value;
-                    this.NotifyPropertyChanged(FirstName);
+                    firstName = value;
+                    NotifyPropertyChanged(FirstName);
                 }
             }
         }
         public string LastName
         {
-            get { return this.lastName; }
+            get { return lastName; }
             set
             {
-                if (this.lastName != value)
+                if (lastName != value)
                 {
-                    this.lastName = value;
-                    this.NotifyPropertyChanged(LastName);
+                    lastName = value;
+                    NotifyPropertyChanged(lastName);
                 }
             }
         }
-        #endregion construktors
+        #endregion setters and getters
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
         #region IDataErrorInfo Members
@@ -105,7 +107,7 @@ namespace Project_2.model
                 switch (columnName)
                 {
                     case "Pesel":
-                        if (string.IsNullOrEmpty(this.Pesel.ToString()) || this.Pesel < 10000000000 || this.Pesel < 99999999999)
+                        if (string.IsNullOrEmpty(Pesel.ToString()) || Pesel < 10000000000 || Pesel < 99999999999)
                             return "Podaj numer PESEL, 11 cyfr";
                         break;
                     default:

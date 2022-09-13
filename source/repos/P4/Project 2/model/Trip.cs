@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace Project_2.model
 {
@@ -36,20 +37,20 @@ namespace Project_2.model
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        #region construktors
+        #region setters and getters
 
         public string VIN
         {
             get
             {
-                return this.vin;
+                return vin;
             }
             set
             {
-                if (this.vin != value)
+                if (vin != value)
                 {
-                    this.vin = value;
-                    this.NotifyPropertyChanged(VIN);
+                    vin = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -57,62 +58,61 @@ namespace Project_2.model
         {
             get
             {
-                return this.employeeID;
+                return employeeID;
             }
             set
             {
-                if (this.employeeID != value)
+                if (employeeID != value)
                 {
-                    this.employeeID = value;
-                    this.NotifyPropertyChanged(EmployeeID.ToString());
+                    employeeID = value;
+                    OnPropertyChanged();
                 }
             }
         }
         public string TripPurpose
         {
-            get { return this.tripPurpose; }
+            get { return tripPurpose; }
             set
             {
-                if (this.tripPurpose != value)
+                if (tripPurpose != value)
                 {
-                    this.tripPurpose = value;
-                    this.NotifyPropertyChanged(TripPurpose);
+                    tripPurpose = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
         public DateTime? ReturnDateTime
         {
-            get { return this.returnDateTime; }
+            get { return returnDateTime; }
             set
             {
-                if (this.returnDateTime != value)
+                if (returnDateTime != value)
                 {
-                    this.returnDateTime = value;
-                    this.NotifyPropertyChanged(ReturnDateTime.ToString());
+                    returnDateTime = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
         public int? CounterAfter
         {
-            get { return this.counterAfter; }
+            get { return counterAfter; }
             set
             {
-                if (this.counterAfter != value)
+                if (counterAfter != value)
                 {
-                    this.counterAfter = value;
-                    this.NotifyPropertyChanged(CounterAfter.ToString());
+                    counterAfter = value;
+                    OnPropertyChanged(CounterAfter.ToString());
                 }
             }
         }
 
-        #endregion construktors
+        #endregion setters and getters
 
-        public void NotifyPropertyChanged(string propName)
+        public void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         #region IDataErrorInfo Members
@@ -129,11 +129,11 @@ namespace Project_2.model
                 switch (columnName)
                 {
                     case "ReturnDateTime":
-                        if (this.ReturnDateTime < this.TakeDateTime || this.ReturnDateTime != null)
+                        if (ReturnDateTime < TakeDateTime || ReturnDateTime != null)
                             return "Data zwrotu nie może nastąpić przed datą wypożyczenia";
                         break;
                     case "CounterAfter":
-                        if (this.CounterAfter < this.CounterBefore)
+                        if (CounterAfter < CounterBefore)
                             return "Stan licznika po podróży nie może być niższy niż przed";
                         break;
                     default:
@@ -148,8 +148,8 @@ namespace Project_2.model
 
         public override string ToString()
         {
-            return $"Przejazd o ID: {this.TripID} od {this.TakeDateTime}" +
-                $"\nID pracownika: {this.Employee.EmployeeID}\n";
+            return $"Przejazd o ID: {TripID} od {TakeDateTime}" +
+                $"\nID pracownika: {Employee.EmployeeID}\n";
         }
     }
 }
