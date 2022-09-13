@@ -30,8 +30,9 @@ namespace Project_2.UserControls
         /// <param name="e"></param>
         private void SearchEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
+            var tempEmpoyees = context.EmployeeDbSet.Where(x => true);
             employees = EmployeeHasDlSearchToggleBtn.IsChecked == true ? getQueries.GetEmployeesWithDriverLicense(context) : getQueries.GetAllEmployees(context);
-            employees = EmployeeSearchId.Text.Length > 0 ? employees.Where(x => x.EmployeeID.ToString().Contains(EmployeeSearchId.Text)).ToList() : employees;
+            tempEmpoyees = EmployeeSearchId.Text.Length > 0 ? tempEmpoyees.Where(x => x.EmployeeID.ToString().Contains(EmployeeSearchId.Text)) : tempEmpoyees;
             employees = EmployeeSearchFirstName.Text.Length > 0 ? employees.Where(x => x.FirstName.Contains(EmployeeSearchFirstName.Text)).ToList() : employees;
             employees = EmployeeSearchLastName.Text.Length > 0 ? employees.Where(x => x.LastName.Contains(EmployeeSearchLastName.Text)).ToList() : employees;
             employees = EmployeeSearchPESEL.Text.Length > 0 ? employees.Where(x => x.Pesel.ToString().Contains(EmployeeSearchPESEL.Text)).ToList() : employees;
@@ -40,7 +41,7 @@ namespace Project_2.UserControls
             employees = EmployeeSearchCity.Text.Length > 0 ? employees.Where(x => x.City.Contains(EmployeeSearchCity.Text)).ToList() : employees;
             employees = EmployeeSearchStreet.Text.Length > 0 ? employees.Where(x => x.Street.Contains(EmployeeSearchStreet.Text)).ToList() : employees;
             employees = EmployeeSearchPhone.Text.Length > 0 ? employees.Where(x => x.Phone.Contains(EmployeeSearchPhone.Text)).ToList() : employees;
-
+            employees = tempEmpoyees.ToList();
             SearchEmployeeListView.ItemsSource = employees != null ? employees : null;
         }
 
