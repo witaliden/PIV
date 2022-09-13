@@ -35,11 +35,6 @@ namespace Project_2.dao
             }
         }
 
-        public bool carExist(CrDbContext context, Car checkedCar)
-        {
-            return getQueries.GetCarsByVinLike(context, checkedCar.VIN).Any();
-        }
-
 
         //
         //Trips
@@ -73,7 +68,7 @@ namespace Project_2.dao
         public void quickTripFinish(CrDbContext context, int tripId, int currentCounterState)
         {
             var trip = context.TripDbSet.FirstOrDefault(t => t.TripID == tripId);
-            if (trip.CounterBefore < currentCounterState)
+            if (trip.CounterBefore <= currentCounterState)
             {
                 var car = context.CarDbSet.FirstOrDefault(c => c.VIN.Equals(trip.VIN));
                 trip.counterAfter = currentCounterState;
@@ -113,7 +108,6 @@ namespace Project_2.dao
                 context.SaveChanges();
             }
         }
-
 
 
         /*---------------Fill database---------------/
